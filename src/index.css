@@ -1,0 +1,117 @@
+body,
+form input,
+button,
+form.textarea {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+main {
+  flex: 1;
+  overflow-y: hidden;
+  padding: 0 10px;
+}
+
+footer {
+  margin-top: 20px;
+  padding: 5px 10px
+}
+
+footer span {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+footer span::after {
+  padding-left: 20px;
+  content: "|"
+}
+
+footer span:last-child::after {
+  content: "";
+  display: none;
+}
+
+.top-links {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.top-links a {
+  color: #000;
+  margin-right: 15px;
+}
+
+.top-links a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.top-links a.xcom svg {
+  width: 21px;
+  height: 21x;
+}
+
+.top-links a.github svg {
+  width: 24px;
+  height: 24x;
+}
+
+.top-links a.linkedin svg {
+  width: 28px;
+  height: 28px;
+}
+
+.merkle-container {
+  display: flex;
+  width: 100%;
+  margin: 10px 0 20px 0;
+}
+
+.merkle-tree {
+  max-width: 50%;
+}
+
+button {
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+form {
+  width: 75%;
+  margin-bottom: 10px;
+}
+
+form label {
+  display: inline-block;
+  margin: 10px 0 3px 0;
+  padding: 3px 5px;
+  font-style: italic;
+  background-color: #ccc;
+}
+
+.error {
+  color: #f5222d;
+  margin-top: 10px;
+}
