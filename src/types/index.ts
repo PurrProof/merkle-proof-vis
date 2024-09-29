@@ -4,13 +4,3 @@ export interface IExample {
   signature: string;
   values: string;
 }
-
-/*export interface IDecodedCalldata {
-  selector: string;
-  decoded: any;
-  accum: {
-    words: AbiWordOffsetMap;
-    coders: Coder[];
-    codersTree: AbiCodersTreeNode;
-  };
-}*/

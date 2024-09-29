@@ -1,7 +1,6 @@
-import { useState } from "react";
 ///////import Examples from './components/Examples';
 import InputFields from "./components/InputFields";
-import MerkleTree from "./components/MerkleTree";
+import TreeNode from "./components/Tree/TreeBranch";
 import CopyUrlButton from './components/CopyUrlButton';
 import Links from './components/Links';
 import Footer from './components/Footer';
@@ -36,9 +35,13 @@ const App = () => {
         <button onClick={resetSelection}>Deselect All</button >
         <CopyUrlButton />
         {tree &&
-          <MerkleTree tree={tree} />}
+          <div className="container">
+            <div className="tree">
+              <TreeNode tree={tree} index={0} level={0} />
+            </div>
+          </div>
+        }
         {error && <div className="error">{error}</div>}
-
       </main >
       <Footer />
     </>

@@ -83,15 +83,61 @@ footer span:last-child::after {
   height: 28px;
 }
 
-.merkle-container {
+.container {
   display: flex;
   width: 100%;
   margin: 10px 0 20px 0;
 }
 
-.merkle-tree {
+.tree {
+  padding-top: 20px;
   max-width: 50%;
+  font-size: 13px;
 }
+
+.tree-node {
+  padding: 10px;
+  border: 1px solid black;
+  display: inline-block;
+  margin-bottom: 25px;
+  width: 500px;
+  position: relative;
+}
+
+.tree-node.leaf {
+  background-color: #d5f7ba;
+}
+
+.tree-node.internal {
+  background-color: #fddd9b;
+}
+
+.tree-node .info {
+  position: absolute;
+  left: 0;
+  top: -16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.tree-node .info .index {
+  font-weight: bold;
+}
+
+.tree-node .info .hash {
+  font-size: 13px;
+}
+
+.tree-branch {}
+
+.tree-children {
+
+  padding-left: 50px;
+}
+
+
 
 button {
   margin-right: 10px;
