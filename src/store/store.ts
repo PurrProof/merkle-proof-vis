@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { StandardMerkleTree } from "@openzeppelin/merkle-tree";
 import type { IExample /*, IDecodedCalldata*/ } from "../types";
 import { getUrlParams, clearUrl } from "../helpers/url";
-//import { validateHex, validateFragment } from "../helpers/security";
+import { validateSignature, validateValues } from "../helpers/security";
 
 // zustand store interface
 interface StoreState {
@@ -20,7 +20,6 @@ interface StoreState {
   buildTree: () => void;
   clearAll: () => void;
   clearResults: () => void;
-  validateInputs: (signature: string, values: string) => boolean;
 
   resetSelection: () => void;
   loadExample: (example: IExample) => void;
@@ -37,7 +36,10 @@ const useStore = create<StoreState>((set, get) => ({
 
   // setters
   setSignature: (signature) => set({ signature }),
-  setValues: (values) => set({ values }),
+  setValues: (values) => {
+    set({ values: values.replace(/],/g, "],\n") });
+  },
+
   setTree: (tree) => set({ tree }),
   setError: (error) => set({ error }),
 
@@ -56,30 +58,13 @@ const useStore = create<StoreState>((set, get) => ({
   },
 
   buildTree: () => {
-    const {
-      signature,
-      values,
-      clearResults,
-      setError,
-      setTree,
-      validateInputs,
-    } = get();
+    const { signature, values, clearResults, setError, setTree } = get();
     clearResults();
 
-    /*********************if (!validateInputs(signature, values)) {
-      return;
-    }******************/
-
     try {
-      const values = [
-        ["0x1111111111111111111111111111111111111111"],
-        ["0x2222222222222222222222222222222222222222"],
-        ["0x3333333333333333333333333333333333333333"],
-        ["0x4444444444444444444444444444444444444444"],
-        ["0x5555555555555555555555555555555555555555"],
-        ["0x6666666666666666666666666666666666666666"],
-      ];
-      const tree = StandardMerkleTree.of(values, ["address"]);
+      const parsedSignature = validateSignature(signature);
+      const parsedValues = validateValues(values);
+      const tree = StandardMerkleTree.of(parsedValues, parsedSignature);
       setTree(tree);
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "unknown error");
@@ -88,24 +73,6 @@ const useStore = create<StoreState>((set, get) => ({
 
   // reset the selection state
   resetSelection: () => set({ selectedIds: [] }),
-
-  validateInputs: (signature: string, values: string): boolean => {
-    const { setError } = get();
-    if (signature === "" || values === "") {
-      setError(signature === "" ? "Empty values." : "Empty signature.");
-      return false;
-    }
-
-    try {
-      // validate values
-      // validate signature
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Invalid input.");
-      return false;
-    }
-
-    return true;
-  },
 
   loadExample: (example: IExample) => {
     const { setSignature, setValues, buildTree, clearAll } = get();
@@ -121,8 +88,7 @@ const useStore = create<StoreState>((set, get) => ({
   },
 
   loadFromUrl: () => {
-    const { buildTree, setSignature, setValues, clearAll, validateInputs } =
-      get();
+    const { setError, clearAll, setSignature, setValues, buildTree } = get();
 
     clearAll();
 
@@ -131,16 +97,19 @@ const useStore = create<StoreState>((set, get) => ({
     // design decision is don't keep url
     clearUrl();
 
-    if (
-      (signature === "" && values === "") || // getUrlParams() may return empty parameters in case of some problems
-      !validateInputs(signature, values) // pre-validate here, don't allow invalid values from url
-    ) {
+    if (signature === "" && values === "") {
       return;
     }
 
-    setSignature(signature);
-    setValues(values);
-    buildTree();
+    try {
+      const parsedSignature = validateSignature(signature);
+      const parsedValues = validateValues(values);
+      setSignature(JSON.stringify(parsedSignature));
+      setValues(JSON.stringify(parsedValues));
+      buildTree();
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "unknown error");
+    }
   },
 }));
 

@@ -1,16 +1,15 @@
 import copy from 'copy-to-clipboard';
-//import useStore from '../store/store';
-//import { generateUrl } from "../helpers/url";
+import useStore from '../store/store';
+import { generateUrl } from "../helpers/url";
 
 const CopyUrlButton = () => {
-    /*const { signature, calldata } = useStore((state) => ({
+    const { signature, values } = useStore((state) => ({
         signature: state.signature,
-        calldata: state.calldata,
-    }));*/
+        values: state.values,
+    }));
 
-    //<button onClick={() => copy(generateUrl(signature, calldata))}>Copy URL</button>
     return (
-        <button>Copy URL</button>
+        <button onClick={() => copy(generateUrl(signature, values))}>Copy URL</button>
     );
 };
 

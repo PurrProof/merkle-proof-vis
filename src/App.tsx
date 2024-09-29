@@ -1,4 +1,5 @@
-///////import Examples from './components/Examples';
+import { useRef, useEffect } from "react";
+import Examples from './components/Examples';
 import InputFields from "./components/InputFields";
 import TreeNode from "./components/Tree/TreeBranch";
 import CopyUrlButton from './components/CopyUrlButton';
@@ -23,13 +24,22 @@ const App = () => {
     loadFromUrl: state.loadFromUrl,
   }));
 
+  // useEffect run twice in dev mode because of React.StrictMode
+  const hasLoaded = useRef(false); // ref to track if effect has run
+  useEffect(() => {
+    if (!hasLoaded.current) {
+      loadFromUrl(); // only run once
+      hasLoaded.current = true; // mark as loaded
+    }
+  }, [loadFromUrl]);
+
   return (
     <>
       <main>
         <h1>Merkle Tree Multi Proofs Visualizer</h1>
+        <Examples />
         <Links />
         <InputFields />
-        {/*<Examples />*/}
         <button onClick={buildTree}>Build Tree</button >
         <button onClick={clearAll}>Clear</button >
         <button onClick={resetSelection}>Deselect All</button >
