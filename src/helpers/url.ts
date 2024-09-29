@@ -3,22 +3,22 @@ import { hexlify, toBeArray } from "ethers";
 
 export const getUrlParams = (): {
   signature: string;
-  calldata: string;
+  values: string;
 } => {
   const searchParams = new URLSearchParams(window.location.search);
-  const sig = searchParams.get("signature") ?? "";
-  const calldata = searchParams.get("calldata") ?? "";
+  const sig = searchParams.get("sig") ?? "";
+  const values = searchParams.get("values") ?? "";
   const lzdata = searchParams.get("lzdata") ?? "";
-  const res = { signature: sig ? decodeURIComponent(sig) : "", calldata: "" };
+  const res = { signature: sig ? decodeURIComponent(sig) : "", values: "" };
 
   try {
     if (lzdata !== "") {
-      // we have compressed calldata in the url, this is priority
-      res.calldata = LZString.decompressFromUint8Array(
+      // we have compressed values in the url, this is priority
+      res.values = LZString.decompressFromUint8Array(
         toBeArray(decodeURIComponent(lzdata))
       );
     } else {
-      res.calldata = calldata ? decodeURIComponent(calldata) : "";
+      res.values = values ? decodeURIComponent(values) : "";
     }
     return res;
   } catch (error: unknown) {
@@ -26,20 +26,8 @@ export const getUrlParams = (): {
   }
 
   // fallback return empty parameters
-  return { signature: "", calldata: "" };
+  return { signature: "", values: "" };
 };
-
-/*
-  //we don't update urls, that's design decision
-  export const updateUrl = (signature: string, calldata: string): void => {
-  const searchParams = new URLSearchParams();
-
-  if (signature) searchParams.set("signature", encodeURIComponent(signature));
-  if (calldata) searchParams.set("calldata", encodeURIComponent(calldata));
-
-  const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
-  window.history.pushState({}, "", newUrl); // update the URL without reloading
-};*/
 
 export const clearUrl = (): void => {
   const newUrl = window.location.pathname;
@@ -48,18 +36,18 @@ export const clearUrl = (): void => {
 
 export const generateUrl = (
   signature: string,
-  calldata: string,
+  values: string,
   format?: string
 ): string => {
   const baseUrl = `${window.location.origin}${window.location.pathname}`;
   const url = new URL(baseUrl);
   const params: Map<string, string> = new Map();
   // don't lz signature, there is no win in length
-  params.set("signature", signature);
+  params.set("sig", signature);
   if (format === "plain") {
-    params.set("calldata", calldata);
+    params.set("values", values);
   } else {
-    params.set("lzdata", hexlify(LZString.compressToUint8Array(calldata)));
+    params.set("lzdata", hexlify(LZString.compressToUint8Array(values)));
   }
   params.forEach((value: string, key: string) => {
     url.searchParams.set(key, encodeURIComponent(value));
