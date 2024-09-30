@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/merkle-proof-vis/static/css/main.2ba59c04.css",
+    "main.css": "/merkle-proof-vis/static/css/main.e925cb0f.css",
     "main.js": "/merkle-proof-vis/static/js/main.0bd60520.js",
     "static/js/163.c8f1abdf.chunk.js": "/merkle-proof-vis/static/js/163.c8f1abdf.chunk.js",
     "index.html": "/merkle-proof-vis/index.html",
-    "main.2ba59c04.css.map": "/merkle-proof-vis/static/css/main.2ba59c04.css.map",
+    "main.e925cb0f.css.map": "/merkle-proof-vis/static/css/main.e925cb0f.css.map",
     "main.0bd60520.js.map": "/merkle-proof-vis/static/js/main.0bd60520.js.map",
     "163.c8f1abdf.chunk.js.map": "/merkle-proof-vis/static/js/163.c8f1abdf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2ba59c04.css",
+    "static/css/main.e925cb0f.css",
     "static/js/main.0bd60520.js"
   ]
 }
