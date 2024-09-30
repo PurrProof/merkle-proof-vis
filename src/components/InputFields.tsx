@@ -1,4 +1,4 @@
-import useStore from "../store/store"; // Import Zustand store
+import useStore from "../store/store";
 
 const InputFields = () => {
     const { signature, setSignature, values, setValues, buildTree } = useStore(
@@ -12,27 +12,31 @@ const InputFields = () => {
     );
 
     return (
-        <form className="calldata" onSubmit={(event) => { event.preventDefault(); buildTree() }}>
+        <form
+            className="values"
+            onSubmit={(event) => {
+                event.preventDefault();
+                buildTree();
+            }}
+        >
             <div>
-                <label htmlFor="fsignature">Type signature:</label>
+                <label htmlFor="fsignature"><span className="name">Type signature:</span></label>
                 <input
                     id="fsignature"
                     type="text"
-                    value={signature}
-                    onChange={(e) => setSignature(e.target.value)}
+                    defaultValue={signature}
+                    onBlur={(e) => setSignature(e.target.value)}
                     placeholder="Enter type signature"
-                    style={{ width: "100%" }}
                 />
             </div>
             <div>
-                <label htmlFor="fvalues">Values:</label>
+                <label htmlFor="fvalues"><span className="name">Values:</span></label>
                 <textarea
                     id="fvalues"
-                    value={values}
-                    onChange={(e) => setValues(e.target.value)}
+                    defaultValue={values}
+                    onBlur={(e) => setValues(e.target.value)}
                     placeholder="Enter values"
-                    rows={4}
-                    style={{ width: "100%" }}
+                    rows={10}
                 />
             </div>
         </form>

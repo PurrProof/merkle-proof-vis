@@ -87,6 +87,11 @@ footer span:last-child::after {
   height: 28px;
 }
 
+form.values textarea,
+form.values input {
+  width: 70%;
+}
+
 .container {
   display: flex;
   width: 100%;
@@ -190,6 +195,10 @@ form {
 }
 
 form label {
+  display: block;
+}
+
+form label span.name {
   display: inline-block;
   margin: 10px 0 3px 0;
   padding: 3px 5px;
