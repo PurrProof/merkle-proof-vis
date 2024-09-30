@@ -1,28 +1,33 @@
 import React from 'react';
 import useStore from '../store/store';
 import { MultiProof } from '@openzeppelin/merkle-tree/dist/core';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
 
 const MerkleProofs = () => {
-    const { selectedLeafs, tree } = useStore(
-        (state) => ({
-            tree: state.tree,
-            selectedLeafs: state.selectedLeaves,
-        })
-    );
+    const { selectedLeafs, tree } = useStore((state) => ({
+        tree: state.tree,
+        selectedLeafs: state.selectedLeaves,
+    }));
 
     let proofs: MultiProof<string, any[]> | null = null;
 
     // Only calculate proofs if both tree and selectedLeafs are available
     if (tree && selectedLeafs.length > 0) {
         proofs = tree.getMultiProof(selectedLeafs);
-        console.log(proofs);
     }
 
-    return (
+    return proofs ? (
         <div className="proofs">
-            {proofs ? JSON.stringify(proofs.proof, null, 2) : "No proofs available."}
+            <h3>Proofs</h3>
+            <div className="content">
+                <SyntaxHighlighter language="json" style={atomOneLight}>
+                    {JSON.stringify(proofs, null, 2)}
+                </SyntaxHighlighter>
+            </div>
         </div>
-    );
-}
+    ) : null;
+};
 
 export default React.memo(MerkleProofs);

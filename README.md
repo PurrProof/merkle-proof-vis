@@ -32,12 +32,11 @@ This project is built using several open-source tools and libraries. I would lik
 - [Create-React-app](https://github.com/facebook/create-react-app) – Create React apps with no build configuration.
 - [React-xarrows](https://github.com/Eliav2/react-xarrows) – Used to draw arrows between elements in the visual representation of calldata.
 - [Zustand](https://github.com/pmndrs/zustand) – A lightweight state management library used to manage the application's state.
-- [Ethers.js](https://github.com/ethers-io/ethers.js) – Used for ABI decoding and interacting with Ethereum data (a customized version was used).
-- [And Design Colors](https://github.com/ant-design/ant-design-colors) - Color Palettes Calculator of Ant Design
 - [Copy-to-clipboard](https://github.com/sudodoki/copy-to-clipboard) – Enables the copy-to-clipboard functionality for sharing calldata and visualizations.
 - [Lz-string](https://github.com/pieroxy/lz-string) - LZ-based compression algorithm for JavaScript.
 - [Pnpm](https://pnpm.io) – Fast, disk space efficient package manager.
 - [Flowbyte](https://github.com/themesberg/flowbite) – Nice icons.
+- [React Syntax Highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter)
 
 ### Other Dependencies
 
