@@ -113,6 +113,7 @@ footer span:last-child::after {
 .tree {
   padding-top: 20px;
   font-size: 13px;
+  position: relative;
 }
 
 .tree-node {
