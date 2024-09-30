@@ -1,6 +1,6 @@
 {
-  "short_name": "MerkleProofsDemo",
-  "name": "Merkle Multi Proofs Visualizer",
+  "short_name": "MerkleProofVis",
+  "name": "Merkle Tree Multi-Proof Visualizer",
   "icons": [
     {
       "src": "favicon.ico",
