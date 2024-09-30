@@ -18,8 +18,8 @@ const TreeNode = ({ nodeId, index, nodeValue, nodeHash, valueIndex }: TreeNodePr
         })
     );
 
-    const selected = valueIndex && selectedLeaves.includes(valueIndex) ? " selected" : "";
     const isLeaf = valueIndex !== null;
+    const selected = isLeaf && selectedLeaves.includes(valueIndex) ? " selected" : "";
 
     return (
         <div

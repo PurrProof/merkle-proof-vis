@@ -57,7 +57,7 @@ const Examples = () => {
     const loadExample = useStore((state) => state.loadExample)
 
     return (
-        <div className="examples">Examples:
+        <div className="examples">Examples:&nbsp;
             {examples.map((example: IExample) => (
                 <button key={example.id} onClick={() => loadExample(example)}>{example.name}</button>
             ))}

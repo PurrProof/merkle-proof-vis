@@ -71,7 +71,8 @@ const useStore = create<StoreState>((set, get) => ({
   },
 
   buildTree: () => {
-    const { signature, values, clearResults, setError, setTree } = get();
+    const { signature, values, clearResults, setError, setTree, onLeafClick } =
+      get();
     clearResults();
 
     try {
@@ -79,6 +80,7 @@ const useStore = create<StoreState>((set, get) => ({
       const parsedValues = validateValues(values);
       const tree = StandardMerkleTree.of(parsedValues, parsedSignature);
       setTree(tree);
+      onLeafClick(0);
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "unknown error");
     }
