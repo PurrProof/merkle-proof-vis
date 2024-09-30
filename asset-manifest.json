@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/merkle-proofs-vis/static/css/main.2ba59c04.css",
-    "main.js": "/merkle-proofs-vis/static/js/main.f18e1f11.js",
-    "static/js/163.c8f1abdf.chunk.js": "/merkle-proofs-vis/static/js/163.c8f1abdf.chunk.js",
-    "index.html": "/merkle-proofs-vis/index.html",
-    "main.2ba59c04.css.map": "/merkle-proofs-vis/static/css/main.2ba59c04.css.map",
-    "main.f18e1f11.js.map": "/merkle-proofs-vis/static/js/main.f18e1f11.js.map",
-    "163.c8f1abdf.chunk.js.map": "/merkle-proofs-vis/static/js/163.c8f1abdf.chunk.js.map"
+    "main.css": "/merkle-proof-vis/static/css/main.2ba59c04.css",
+    "main.js": "/merkle-proof-vis/static/js/main.617285fc.js",
+    "static/js/163.c8f1abdf.chunk.js": "/merkle-proof-vis/static/js/163.c8f1abdf.chunk.js",
+    "index.html": "/merkle-proof-vis/index.html",
+    "main.2ba59c04.css.map": "/merkle-proof-vis/static/css/main.2ba59c04.css.map",
+    "main.617285fc.js.map": "/merkle-proof-vis/static/js/main.617285fc.js.map",
+    "163.c8f1abdf.chunk.js.map": "/merkle-proof-vis/static/js/163.c8f1abdf.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2ba59c04.css",
-    "static/js/main.f18e1f11.js"
+    "static/js/main.617285fc.js"
   ]
 }
