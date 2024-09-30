@@ -10,12 +10,12 @@ const MerkleProofs = () => {
         })
     );
 
-    // Initialize proofs as an empty object or array if necessary
     let proofs: MultiProof<string, any[]> | null = null;
 
     // Only calculate proofs if both tree and selectedLeafs are available
     if (tree && selectedLeafs.length > 0) {
         proofs = tree.getMultiProof(selectedLeafs);
+        console.log(proofs);
     }
 
     return (

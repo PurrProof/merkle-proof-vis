@@ -48,7 +48,7 @@ const App = () => {
         {tree &&
           <div className="container">
             <div className="tree">
-              <TreeBranch tree={tree} index={0} level={0} />
+              <TreeBranch tree={tree} index={0} />
             </div>
             <MerkleProofs />
           </div>

@@ -1,27 +1,24 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import TreeNode from './TreeNode';
 import TreeArrow from './TreeArrow';
 import { StandardMerkleTree } from '@openzeppelin/merkle-tree';
-
-const leftChildIndex = (i: number) => 2 * i + 1;
-const rightChildIndex = (i: number) => 2 * i + 2;
+import useStore from '../../store/store';
 
 interface TreeBranchProps {
     tree: StandardMerkleTree<any[]>;
     index?: number;
-    level?: number;
-    parentId?: string;
+    parentIndex?: number;
 }
 
-const TreeBranch = ({ tree, index = 0, level = 0, parentId }: TreeBranchProps) => {
-    const treeDump = useMemo(() => tree.dump(), [tree]);
+const TreeBranch = ({ tree, index = 0, parentIndex }: TreeBranchProps) => {
+    const treeDump = tree.dump();
     const totalEntries = treeDump.tree.length;
 
-    const leftIndex = leftChildIndex(index);
-    const rightIndex = rightChildIndex(index);
+    const leftIndex = 2 * index + 1;
+    const rightIndex = 2 * index + 2;
     const nodeId = `node-${index}`;
 
-    const { nodeValue, nodeHash, valueIndex } = useMemo(() => {
+    const { nodeValue, nodeHash, valueIndex } = (() => {
         const entry = treeDump.values.find((v) => v.treeIndex === index);
         const hash = treeDump.tree[index];
         let valueIndex = null;
@@ -32,7 +29,23 @@ const TreeBranch = ({ tree, index = 0, level = 0, parentId }: TreeBranchProps) =
         } else {
             return { nodeValue: 'Internal Node', nodeHash: hash, valueIndex };
         }
-    }, [index, treeDump]);
+    })();
+
+    const { proofSteps } = useStore((state) => ({
+        proofSteps: state.proofSteps,
+    }));
+
+    // determine if this arrow is part of a proof step
+    let arrowLabel: string | undefined;
+    if (parentIndex !== undefined && proofSteps) {
+        const step = proofSteps.find(
+            (step) =>
+                ((step.leftIndex === index || step.rightIndex === index) && step.parentIndex === parentIndex)
+        );
+        if (step) {
+            arrowLabel = `${step.stepNumber}`;
+        }
+    }
 
     return (
         <div className="tree-branch">
@@ -44,27 +57,17 @@ const TreeBranch = ({ tree, index = 0, level = 0, parentId }: TreeBranchProps) =
                 valueIndex={valueIndex}
             />
 
-            {parentId && <TreeArrow startId={nodeId} endId={parentId} />}
+            {parentIndex !== undefined && (
+                <TreeArrow startId={nodeId} endId={`node-${parentIndex}`} label={arrowLabel} />
+            )}
 
             <div className="tree-children">
-                {/* render left child if it exists */}
                 {leftIndex < totalEntries && (
-                    <TreeBranch
-                        tree={tree}
-                        index={leftIndex}
-                        level={level + 1}
-                        parentId={nodeId}
-                    />
+                    <TreeBranch tree={tree} index={leftIndex} parentIndex={index} />
                 )}
 
-                {/* render right child if it exists */}
                 {rightIndex < totalEntries && (
-                    <TreeBranch
-                        tree={tree}
-                        index={rightIndex}
-                        level={level + 1}
-                        parentId={nodeId}
-                    />
+                    <TreeBranch tree={tree} index={rightIndex} parentIndex={index} />
                 )}
             </div>
         </div>

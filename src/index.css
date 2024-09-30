@@ -121,7 +121,6 @@ footer span:last-child::after {
 
 
 .tree-node.leaf.selected {
-  background-color: #dd8bee;
   background-color: #7eb1eb;
 }
 
@@ -150,11 +149,20 @@ footer span:last-child::after {
 .tree-branch {}
 
 .tree-children {
-
   padding-left: 50px;
 }
 
-
+.arrow-label {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 20px;
+  width: 20px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+  background-color: #f07042;
+  color: #fff;
+}
 
 button {
   margin-right: 10px;

@@ -4,9 +4,10 @@ import XArrow from 'react-xarrows';
 interface TreeArrowProps {
     startId: string;
     endId: string;
+    label?: string;
 }
 
-const TreeArrow = ({ startId, endId }: TreeArrowProps) => (
+const TreeArrow = ({ startId, endId, label }: TreeArrowProps) => (
     <XArrow
         end={endId}
         start={startId}
@@ -19,6 +20,7 @@ const TreeArrow = ({ startId, endId }: TreeArrowProps) => (
         startAnchor="left"
         color="#000"
         strokeWidth={1}
+        labels={label ? { start: <span className="arrow-label">{label}</span> } : undefined}
     />
 );
 

@@ -3,6 +3,14 @@ import { StandardMerkleTree } from "@openzeppelin/merkle-tree";
 import type { IExample /*, IDecodedCalldata*/ } from "../types";
 import { getUrlParams, clearUrl } from "../helpers/url";
 import { validateSignature, validateValues } from "../helpers/security";
+import { generateProofSteps } from "../helpers/proof";
+
+interface ProofStep {
+  leftIndex: number;
+  rightIndex: number;
+  parentIndex: number;
+  stepNumber: number;
+}
 
 // zustand store interface
 interface StoreState {
@@ -11,11 +19,13 @@ interface StoreState {
   tree: StandardMerkleTree<any[]> | null;
   error: string | null;
   selectedLeaves: number[];
+  proofSteps: ProofStep[] | null;
 
   setSignature: (signature: string) => void;
   setValues: (values: string) => void;
   setTree: (tree: StandardMerkleTree<any[]> | null) => void;
   setError: (error: string | null) => void;
+  setProofSteps: () => void;
 
   buildTree: () => void;
   clearAll: () => void;
@@ -34,6 +44,7 @@ const useStore = create<StoreState>((set, get) => ({
   tree: null,
   error: null,
   selectedLeaves: [],
+  proofSteps: null,
 
   // setters
   setSignature: (signature) => set({ signature }),
@@ -52,9 +63,10 @@ const useStore = create<StoreState>((set, get) => ({
   },
 
   clearResults: () => {
-    const { resetSelection, setError, setTree } = get();
+    const { resetSelection, setError, setTree, setProofSteps } = get();
     setError(null);
     setTree(null);
+    setProofSteps();
     resetSelection();
   },
 
@@ -73,11 +85,21 @@ const useStore = create<StoreState>((set, get) => ({
   },
 
   onLeafClick: (id) => {
-    const { selectedLeaves } = get();
+    const { selectedLeaves, setProofSteps } = get();
     const newSelectedLeaves = selectedLeaves.includes(id)
       ? selectedLeaves.filter((selectedId) => selectedId !== id)
       : [...selectedLeaves, id];
     set({ selectedLeaves: newSelectedLeaves });
+    setProofSteps();
+  },
+
+  setProofSteps: () => {
+    const { tree, selectedLeaves } = get();
+    if (!tree || selectedLeaves.length === 0) {
+      set({ proofSteps: null });
+      return;
+    }
+    set({ proofSteps: generateProofSteps(tree, selectedLeaves) });
   },
 
   // reset the selection state
