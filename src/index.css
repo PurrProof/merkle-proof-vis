@@ -89,6 +89,11 @@ footer span:last-child::after {
   margin: 10px 0 20px 0;
 }
 
+.proofs {
+  min-width: 50%;
+  border: 1px solid #000;
+}
+
 .tree {
   padding-top: 20px;
   max-width: 50%;
@@ -105,7 +110,19 @@ footer span:last-child::after {
 }
 
 .tree-node.leaf {
+  cursor: pointer;
   background-color: #d5f7ba;
+}
+
+.tree-node.leaf:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+
+.tree-node.leaf.selected {
+  background-color: #dd8bee;
+  background-color: #7eb1eb;
 }
 
 .tree-node.internal {

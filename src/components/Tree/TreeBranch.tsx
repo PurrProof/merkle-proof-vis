@@ -21,14 +21,16 @@ const TreeBranch = ({ tree, index = 0, level = 0, parentId }: TreeBranchProps) =
     const rightIndex = rightChildIndex(index);
     const nodeId = `node-${index}`;
 
-    const { nodeValue, nodeHash, isLeaf } = useMemo(() => {
+    const { nodeValue, nodeHash, valueIndex } = useMemo(() => {
         const entry = treeDump.values.find((v) => v.treeIndex === index);
         const hash = treeDump.tree[index];
+        let valueIndex = null;
         if (entry) {
+            valueIndex = treeDump.values.indexOf(entry);
             const value = entry.value.join(', ');
-            return { nodeValue: value, nodeHash: hash, isLeaf: true };
+            return { nodeValue: value, nodeHash: hash, valueIndex };
         } else {
-            return { nodeValue: 'Internal Node', nodeHash: hash, isLeaf: false };
+            return { nodeValue: 'Internal Node', nodeHash: hash, valueIndex };
         }
     }, [index, treeDump]);
 
@@ -39,7 +41,7 @@ const TreeBranch = ({ tree, index = 0, level = 0, parentId }: TreeBranchProps) =
                 index={index}
                 nodeValue={nodeValue}
                 nodeHash={nodeHash}
-                isLeaf={isLeaf}
+                valueIndex={valueIndex}
             />
 
             {parentId && <TreeArrow startId={nodeId} endId={parentId} />}

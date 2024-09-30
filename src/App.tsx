@@ -1,7 +1,8 @@
 import { useRef, useEffect } from "react";
 import Examples from './components/Examples';
 import InputFields from "./components/InputFields";
-import TreeNode from "./components/Tree/TreeBranch";
+import MerkleProofs from "./components/MerkleProofs";
+import TreeBranch from "./components/Tree/TreeBranch";
 import CopyUrlButton from './components/CopyUrlButton';
 import Links from './components/Links';
 import Footer from './components/Footer';
@@ -47,8 +48,9 @@ const App = () => {
         {tree &&
           <div className="container">
             <div className="tree">
-              <TreeNode tree={tree} index={0} level={0} />
+              <TreeBranch tree={tree} index={0} level={0} />
             </div>
+            <MerkleProofs />
           </div>
         }
         {error && <div className="error">{error}</div>}

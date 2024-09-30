@@ -10,7 +10,7 @@ interface StoreState {
   values: string;
   tree: StandardMerkleTree<any[]> | null;
   error: string | null;
-  selectedIds: number[];
+  selectedLeaves: number[];
 
   setSignature: (signature: string) => void;
   setValues: (values: string) => void;
@@ -21,6 +21,7 @@ interface StoreState {
   clearAll: () => void;
   clearResults: () => void;
 
+  onLeafClick: (id: number) => void;
   resetSelection: () => void;
   loadExample: (example: IExample) => void;
   loadFromUrl: () => void;
@@ -32,7 +33,7 @@ const useStore = create<StoreState>((set, get) => ({
   values: "",
   tree: null,
   error: null,
-  selectedIds: [],
+  selectedLeaves: [],
 
   // setters
   setSignature: (signature) => set({ signature }),
@@ -71,8 +72,16 @@ const useStore = create<StoreState>((set, get) => ({
     }
   },
 
+  onLeafClick: (id) => {
+    const { selectedLeaves } = get();
+    const newSelectedLeaves = selectedLeaves.includes(id)
+      ? selectedLeaves.filter((selectedId) => selectedId !== id)
+      : [...selectedLeaves, id];
+    set({ selectedLeaves: newSelectedLeaves });
+  },
+
   // reset the selection state
-  resetSelection: () => set({ selectedIds: [] }),
+  resetSelection: () => set({ selectedLeaves: [] }),
 
   loadExample: (example: IExample) => {
     const { setSignature, setValues, buildTree, clearAll } = get();
