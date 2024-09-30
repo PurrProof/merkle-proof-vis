@@ -1,7 +1,7 @@
 {
   "name": "merkle-proofs-vis",
   "version": "0.1.0",
-  "homepage": "https://purrproof.github.io/merkle-proofs-vis",
+  "homepage": "https://purrproof.github.io/merkle-proof-vis",
   "private": false,
   "dependencies": {
     "@openzeppelin/merkle-tree": "^1.0.7",
