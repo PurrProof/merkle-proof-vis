@@ -19,14 +19,15 @@ const TreeNode = ({ nodeId, index, nodeValue, nodeHash, valueIndex }: TreeNodePr
     );
 
     const selected = valueIndex && selectedLeaves.includes(valueIndex) ? " selected" : "";
+    const isLeaf = valueIndex !== null;
 
     return (
         <div
             id={nodeId}
-            className={(valueIndex ? "tree-node leaf" : "tree-node internal") + selected}
-            onClick={valueIndex ? () => { onLeafClick(valueIndex) } : undefined}
+            className={(isLeaf ? "tree-node leaf" : "tree-node internal") + selected}
+            onClick={isLeaf ? () => { onLeafClick(valueIndex) } : undefined}
         >
-            {valueIndex ? <span className="value">{nodeValue}</span> : index === 0 ? "root node" : "internal node"}
+            {isLeaf ? <span className="value">{nodeValue}</span> : index === 0 ? "root node" : "internal node"}
             <div className="info">
                 <span className="index">#{index}: </span>
                 <span className="hash">{nodeHash}</span>
