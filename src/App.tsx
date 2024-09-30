@@ -37,7 +37,7 @@ const App = () => {
   return (
     <>
       <main>
-        <h1>Merkle Tree Multi Proofs Visualizer</h1>
+        <h1>Merkle Tree Multi-Proof Visualizer</h1>
         <Examples />
         <Links />
         <InputFields />
