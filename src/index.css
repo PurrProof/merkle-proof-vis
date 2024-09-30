@@ -109,7 +109,6 @@ footer span:last-child::after {
   margin-top: 5px;
 }
 
-
 .tree {
   padding-top: 20px;
   font-size: 13px;
@@ -201,4 +200,27 @@ form label {
 .error {
   color: #f5222d;
   margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .proofs {
+    margin-left: 0;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .top-links {
+    width: 25px;
+    text-align: center;
+  }
+
+  .top-links a {
+    margin-right: 0;
+  }
+
+
 }
