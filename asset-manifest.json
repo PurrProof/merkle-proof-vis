@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/merkle-proofs-vis/static/css/main.2ba59c04.css",
+    "main.js": "/merkle-proofs-vis/static/js/main.f18e1f11.js",
+    "static/js/163.c8f1abdf.chunk.js": "/merkle-proofs-vis/static/js/163.c8f1abdf.chunk.js",
+    "index.html": "/merkle-proofs-vis/index.html",
+    "main.2ba59c04.css.map": "/merkle-proofs-vis/static/css/main.2ba59c04.css.map",
+    "main.f18e1f11.js.map": "/merkle-proofs-vis/static/js/main.f18e1f11.js.map",
+    "163.c8f1abdf.chunk.js.map": "/merkle-proofs-vis/static/js/163.c8f1abdf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2ba59c04.css",
+    "static/js/main.f18e1f11.js"
+  ]
+}
