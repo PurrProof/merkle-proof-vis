@@ -1,0 +1,235 @@
+body,
+form input,
+button,
+form.textarea {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+main {
+  flex: 1;
+  overflow-y: hidden;
+  padding: 0 10px;
+}
+
+footer {
+  margin-top: 20px;
+  padding: 5px 10px
+}
+
+footer p {
+  margin-bottom: 10px;
+}
+
+footer span {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+footer span::after {
+  padding-left: 20px;
+  content: "|"
+}
+
+footer span:last-child::after {
+  content: "";
+  display: none;
+}
+
+.top-links {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.top-links a {
+  color: #000;
+  margin-right: 15px;
+}
+
+.top-links a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.top-links a.xcom svg {
+  width: 21px;
+  height: 21x;
+}
+
+.top-links a.github svg {
+  width: 24px;
+  height: 24x;
+}
+
+.top-links a.linkedin svg {
+  width: 28px;
+  height: 28px;
+}
+
+form.values textarea,
+form.values input {
+  width: 70%;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  margin: 10px 0 20px 0;
+}
+
+.proofs {
+  margin-left: 15px;
+  padding: 10px;
+  align-self: flex-start;
+  width: auto;
+  white-space: pre;
+}
+
+.proofs h3 {
+  margin-bottom: 5px;
+}
+
+.proofs pre {
+  margin-top: 5px;
+}
+
+.tree {
+  padding-top: 20px;
+  font-size: 13px;
+  position: relative;
+}
+
+.tree-node {
+  padding: 10px;
+  border: 1px solid black;
+  display: inline-block;
+  margin-bottom: 25px;
+  width: 500px;
+  position: relative;
+}
+
+.tree-node.leaf {
+  cursor: pointer;
+  background-color: #d5f7ba;
+}
+
+.tree-node.leaf:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+
+.tree-node.leaf.selected {
+  background-color: #7eb1eb;
+}
+
+.tree-node.internal {
+  background-color: #fddd9b;
+}
+
+.tree-node .info {
+  position: absolute;
+  left: 0;
+  top: -16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.tree-node .info .index {
+  font-weight: bold;
+}
+
+.tree-node .info .hash {
+  font-size: 13px;
+}
+
+.tree-branch {}
+
+.tree-children {
+  padding-left: 50px;
+}
+
+.arrow-label {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 20px;
+  width: 20px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+  background-color: #f07042;
+  color: #fff;
+}
+
+button {
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+form {
+  width: 75%;
+  margin-bottom: 10px;
+}
+
+form label {
+  display: block;
+}
+
+form label span.name {
+  display: inline-block;
+  margin: 10px 0 3px 0;
+  padding: 3px 5px;
+  font-style: italic;
+  background-color: #ccc;
+}
+
+.error {
+  color: #f5222d;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .proofs {
+    margin-left: 0;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .top-links {
+    width: 25px;
+    text-align: center;
+  }
+
+  .top-links a {
+    margin-right: 0;
+  }
+
+
+}
